@@ -16,6 +16,15 @@ import Post from './Post';
 
 
 
+import * as dotenv from "dotenv";
+
+
+
+if (typeof process !== 'undefined') {
+  require('dotenv').config(); // load environment variables from .env file
+}
+
+
 const router = createBrowserRouter([
 
   {

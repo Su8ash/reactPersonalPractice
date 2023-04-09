@@ -3,21 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import './home.css';
 import { useNavigate, useParams } from 'react-router-dom';
-
-
-
-
-
-
-const fetchPosts = async (id: String | undefined) => {
-    try {
-        const response = await axios.get(`https://gorest.co.in/public/v2/users/836888/posts?page=${id}`);
-        return response;
-    } catch (error) {
-        throw Error("Unable to fetch data");
-    }
-
-}
+import AddNewPost from './components/AddNewPost';
+import { fetchPosts } from '../api';
 
 
 
@@ -48,7 +35,7 @@ const Home = () => {
                 ) :
                     (
                         <div>
-
+                            <AddNewPost />
                             <div className='container-row'>
                                 <button
                                     disabled={data.headers['x-links-previous'] ? false : true}
@@ -60,6 +47,7 @@ const Home = () => {
                                             navigate(`/${Number(id) - 1}`);
                                         }
                                     }}>Previous</button>
+
                                 <button onClick={() => {
                                     if (data.headers['x-links-next'])
                                         navigate(`/${Number(id) + 1}`);

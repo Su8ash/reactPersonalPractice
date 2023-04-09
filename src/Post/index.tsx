@@ -3,21 +3,13 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import '../Home/home.css';
 import { useNavigate, useParams } from 'react-router-dom';
+import { fetchPost } from '../api';
 
 
 
 
 
 
-const fetchPost = async (id: String | undefined) => {
-    try {
-        const response = await axios.get(`https://gorest.co.in/public/v2/posts/${id}`);
-        return response;
-    } catch (error) {
-        throw Error("Unable to fetch data");
-    }
-
-}
 
 
 
