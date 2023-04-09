@@ -7,27 +7,48 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import ErrorPage from './error';
-import Contact from './routes/contact';
 
-import Root from "./routes/root";
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
+import Home from './Home';
+import Post from './Post';
+
+
 
 const router = createBrowserRouter([
+
+  {
+    path: "/post/:id",
+    element: <Post />,
+    errorElement: <ErrorPage />,
+  },
   {
     path: "/",
-    element: <Root />,
+    element: <Home />,
     errorElement: <ErrorPage />,
+
     // loader: rootLoader,
     children: [
       {
-        path: "contacts/:contactId",
-        element: <Contact />,
+        path: "/:id",
+        element: <Home />,
+        errorElement: <ErrorPage />,
       },
     ],
   },
 ]);
 
+const queryClient = new QueryClient();
+
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+
+      <RouterProvider router={router} />
+
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   </React.StrictMode>,
 )
