@@ -5,6 +5,7 @@ import './home.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import AddNewPost from './components/AddNewPost';
 import { fetchPosts } from '../api';
+import { json } from 'stream/consumers';
 
 
 
@@ -13,7 +14,7 @@ const Home = () => {
     let navigate = useNavigate();
 
     console.log(id);
-
+    // console.log(import.meta.env);
     const { data, isLoading, error, isError } = useQuery(["posts", id],
         () => fetchPosts(id), {
         keepPreviousData: true,

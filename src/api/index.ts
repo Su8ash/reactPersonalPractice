@@ -1,16 +1,35 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import axios from "axios";
 
-const URL = process.env.REACT_APP_URL || "https://gorest.co.in/public/v2/";
+
+
+// dotenv.config(
+//     {
+//         path: '.env'
+//     }
+// );
+// console.log(process.env);
+// console.log("API");
+// console.log(process);
+
+
+const {
+    VITE_REACT_APP_URL,
+    VITE_REACT_APP_TOKEN
+} = import.meta.env;
+
+
+// const URL = "https://gorest.co.in/public/v2/";
+
 
 
 
 
 const apiCall = axios.create({
-    baseURL: URL,
+    baseURL: VITE_REACT_APP_URL,
 
     headers: {
-        Authorization: process.env.REACT_APP_TOKEN,
+        Authorization: VITE_REACT_APP_TOKEN,
     },
 });
 
